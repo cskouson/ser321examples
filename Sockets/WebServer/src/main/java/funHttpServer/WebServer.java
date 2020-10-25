@@ -193,7 +193,7 @@ class WebServer {
             builder.append("\n");
             builder.append("File not found: " + file);
           }
-        } else if (request.contains("multiply?")) {
+        } else if (request.contains("multiply?")) { /////////////////////////////  /multiply?num1=3&num2=4 multiplies the two inputs and responses with the result
           // This multiplies two numbers, there is NO error handling, so when
           // wrong data is given this just crashes
 
@@ -201,23 +201,32 @@ class WebServer {
           // extract path parameters
           query_pairs = splitQuery(request.replace("multiply?", ""));
 
-          // extract required fields from parameters
-          Integer num1 = Integer.parseInt(query_pairs.get("num1"));
-          Integer num2 = Integer.parseInt(query_pairs.get("num2"));
+          try{
+            // extract required fields from parameters
+            Integer num1 = Integer.parseInt(query_pairs.get("num1"));
+            Integer num2 = Integer.parseInt(query_pairs.get("num2"));
 
-          // do math
-          Integer result = num1 * num2;
+            // do math
+            Integer result = num1 * num2;
 
-          // Generate response
-          builder.append("HTTP/1.1 200 OK\n");
-          builder.append("Content-Type: text/html; charset=utf-8\n");
-          builder.append("\n");
-          builder.append("Result is: " + result);
+            // Generate response
+            builder.append("HTTP/1.1 200 OK\n");
+            builder.append("Content-Type: text/html; charset=utf-8\n");
+            builder.append("\n");
+            builder.append("Result is: " + result);
+          } catch (Exception ex){
+            builder.append("HTTP/1.1 406 Not Acceptable\n");
+            builder.append("Content-Typer: text/html; charset=utf-8\n");
+            builder.append("\n");
+            builder.append("Result is: What are you doing? Are you okay?");
+
+          }
+
 
           // TODO: Include error handling here with a correct error code and
           // a response that makes sense
 
-        } else if (request.contains("github?")) {
+        } else if (request.contains("github?")) {  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           // pulls the query from the request and runs it with GitHub's REST API
           // check out https://docs.github.com/rest/reference/
           //
@@ -239,7 +248,7 @@ class WebServer {
           // amehlhase, 46384989 -> ser316examples
           // amehlhase, 46384989 -> test316
 
-        } else {
+        } else { //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           // if the request is not recognized at all
 
           builder.append("HTTP/1.1 400 Bad Request\n");
