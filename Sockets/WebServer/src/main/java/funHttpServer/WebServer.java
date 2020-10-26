@@ -260,7 +260,7 @@ class WebServer {
 
               //append to output
               builder.append(owner + ", " + ownerID + " -> " + repoName);
-              builder.append("\n");
+              builder.append("<br>");
             }
 
           } catch (Exception ex){
