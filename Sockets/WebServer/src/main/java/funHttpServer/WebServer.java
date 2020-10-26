@@ -259,7 +259,12 @@ class WebServer {
             JsonArray jArr = gson.fromJson(json, JsonArray.class);
   
             for(int i = 0; i < jArr.size(); i++){
-              repoName = jArr.get(i).toString();
+              repoName = jArr.get(i).getAsJsonObject().get("name").toString();
+
+
+
+              //append to output
+              builder.append(repoName);
             }
 
           } catch (Exception ex){
@@ -267,7 +272,7 @@ class WebServer {
           }
 
           builder.append("Check the todos mentioned in the Java source file\n");
-          builder.append(repoName);
+
           // TODO: Parse the JSON returned by your fetch and create an appropriate
           // response
           // and list the owner name, owner id and name of the public repo on your webpage, e.g.
