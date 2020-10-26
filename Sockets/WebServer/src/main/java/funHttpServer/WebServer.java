@@ -226,16 +226,6 @@ class WebServer {
             builder.append("Result is: What are you doing? Are you okay?");
           }
 
-
-
-
-
-
-
-
-
-
-
         } else if (request.contains("github?")) {  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           // pulls the query from the request and runs it with GitHub's REST API
           // check out https://docs.github.com/rest/reference/
@@ -264,7 +254,7 @@ class WebServer {
               ownerID = jArr.get(i).getAsJsonObject().get("owner").getAsJsonObject().get("id").toString();
 
               //append to output
-              builder.append(owner + ", " + ownerID + " -> " + repoName);
+              builder.append(owner + ", " + ownerID + " -> " + repoName + "\n");
             }
 
           } catch (Exception ex){
@@ -279,17 +269,6 @@ class WebServer {
           // amehlhase, 46384989 -> memoranda
           // amehlhase, 46384989 -> ser316examples
           // amehlhase, 46384989 -> test316
-
-
-
-
-
-
-
-
-
-
-
 
         } else { //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           // if the request is not recognized at all
