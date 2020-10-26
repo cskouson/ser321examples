@@ -25,6 +25,10 @@ import java.util.Random;
 import java.util.Map;
 import java.util.LinkedHashMap;
 import java.nio.charset.Charset;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 
 class WebServer {
   public static void main(String args[]) {
@@ -215,16 +219,22 @@ class WebServer {
             builder.append("\n");
             builder.append("Result is: " + result);
           } catch (Exception ex){
+            //if user doesn't provide correct parameters for /multiply?
             builder.append("HTTP/1.1 406 Not Acceptable\n");
             builder.append("Content-Typer: text/html; charset=utf-8\n");
             builder.append("\n");
             builder.append("Result is: What are you doing? Are you okay?");
-
           }
 
 
-          // TODO: Include error handling here with a correct error code and
-          // a response that makes sense
+
+
+
+
+
+
+
+
 
         } else if (request.contains("github?")) {  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           // pulls the query from the request and runs it with GitHub's REST API
@@ -240,13 +250,41 @@ class WebServer {
           String json = fetchURL("https://api.github.com/" + query_pairs.get("query"));
           System.out.println(json);
 
-          builder.append("Check the todos mentioned in the Java source file");
+          //parse json
+          String owner = "";
+          String ownerID = "";
+          String repoName = "";
+          try{
+            Gson gson = new Gson();
+            JsonArray jArr = gson.fromJson(json, JsonArray.class);
+  
+            for(int i = 0; i < jArr.size(); i++){
+              repoName = jArr.get(i).toString;
+            }
+
+          } catch (Exception ex){
+            System.out.println("~~~ Not valid Json ~~~");
+          }
+
+          builder.append("Check the todos mentioned in the Java source file\n");
+          builder.append(repoName);
           // TODO: Parse the JSON returned by your fetch and create an appropriate
           // response
           // and list the owner name, owner id and name of the public repo on your webpage, e.g.
           // amehlhase, 46384989 -> memoranda
           // amehlhase, 46384989 -> ser316examples
           // amehlhase, 46384989 -> test316
+
+
+
+
+
+
+
+
+
+
+
 
         } else { //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           // if the request is not recognized at all

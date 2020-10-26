@@ -4,6 +4,14 @@ apply plugin: 'application'
 //define main class
 mainClassName = 'SimpleServer'
 
+repositories {
+  jcenter()
+}
+
+dependencies {
+  implementation 'com.google.code.gson:gson:2.8.6'
+}
+
 task SimpleWebServer(type: JavaExec) {
   group 'http'
   description 'Simple Http Demo'
