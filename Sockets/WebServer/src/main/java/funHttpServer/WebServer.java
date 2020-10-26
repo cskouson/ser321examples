@@ -259,7 +259,8 @@ class WebServer {
               ownerID = jArr.get(i).getAsJsonObject().get("owner").getAsJsonObject().get("id").toString();
 
               //append to output
-              builder.append(owner + ", " + ownerID + " -> " + repoName + "\n");
+              builder.append(owner + ", " + ownerID + " -> " + repoName);
+              builder.append("\n");
             }
 
           } catch (Exception ex){
