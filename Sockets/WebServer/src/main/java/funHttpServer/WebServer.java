@@ -259,7 +259,7 @@ class WebServer {
             JsonArray jArr = gson.fromJson(json, JsonArray.class);
   
             for(int i = 0; i < jArr.size(); i++){
-              repoName = jArr.get(i).toString;
+              repoName = jArr.get(i).toString();
             }
 
           } catch (Exception ex){
