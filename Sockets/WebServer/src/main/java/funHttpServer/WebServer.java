@@ -240,6 +240,11 @@ class WebServer {
           String json = fetchURL("https://api.github.com/" + query_pairs.get("query"));
           System.out.println(json);
 
+          //http header
+          builder.append("HTTP/1.1 200 OK\n");
+          builder.append("Content-Type: text/html; charset=utf-8\n");
+          builder.append("\n");
+
           //parse json
           String owner = "";
           String ownerID = "";
@@ -254,9 +259,6 @@ class WebServer {
               ownerID = jArr.get(i).getAsJsonObject().get("owner").getAsJsonObject().get("id").toString();
 
               //append to output
-              builder.append("HTTP/1.1 200 OK\n");
-              builder.append("Content-Type: text/html; charset=utf-8\n");
-              builder.append("\n");
               builder.append(owner + ", " + ownerID + " -> " + repoName + "\n");
             }
 
