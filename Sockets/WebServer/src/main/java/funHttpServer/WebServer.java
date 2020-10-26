@@ -260,11 +260,11 @@ class WebServer {
   
             for(int i = 0; i < jArr.size(); i++){
               repoName = jArr.get(i).getAsJsonObject().get("name").toString();
-
-
+              owner = jArr.get(i).getAsJsonObject().get("owner").getAsJsonObject().get("login").toString();
+              ownerID = jArr.get(i).getAsJsonObject().get("owner").getAsJsonObject().get("id").toString();
 
               //append to output
-              builder.append(repoName);
+              builder.append(owner + ", " + ownerID + " -> " + repoName);
             }
 
           } catch (Exception ex){
