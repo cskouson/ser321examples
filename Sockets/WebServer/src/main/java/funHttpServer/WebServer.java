@@ -223,7 +223,7 @@ class WebServer {
             builder.append("HTTP/1.1 406 Not Acceptable\n");
             builder.append("Content-Typer: text/html; charset=utf-8\n");
             builder.append("\n");
-            builder.append("Result is: What are you doing? Are you okay?");
+            builder.append("Result is: Your inputs don't make sense.... Are you okay?");
           }
 
         } else if (request.contains("github?")) {  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -254,6 +254,9 @@ class WebServer {
               ownerID = jArr.get(i).getAsJsonObject().get("owner").getAsJsonObject().get("id").toString();
 
               //append to output
+              builder.append("HTTP/1.1 200 OK\n");
+              builder.append("Content-Type: text/html; charset=utf-8\n");
+              builder.append("\n");
               builder.append(owner + ", " + ownerID + " -> " + repoName + "\n");
             }
 
@@ -261,7 +264,7 @@ class WebServer {
             System.out.println("~~~ Not valid Json ~~~");
           }
 
-          builder.append("Check the todos mentioned in the Java source file\n");
+         //builder.append("Check the todos mentioned in the Java source file\n");
 
           // TODO: Parse the JSON returned by your fetch and create an appropriate
           // response
